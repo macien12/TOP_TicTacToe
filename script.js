@@ -101,3 +101,16 @@ const GameController = (function() {
         resetGame,
     };
 })();
+
+
+const DisplayController = (function() {
+
+const boardElement = document.querySelector(".board");
+
+boardElement.addEventListener("click", (e) => {
+    const index = e.target.dataset.index;
+    if (index !== undefined) {
+        GameController.playRound(index);
+    }
+});
+})();
