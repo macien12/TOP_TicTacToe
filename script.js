@@ -34,8 +34,14 @@ const GameController = (function() {
         }
     }
 
+    function playRound(index) {
+        Gameboard.placeMark(index, currentPlayer.mark);
+        switchTurn();
+    }
 
     return {
-
+        playRound,
     };
-});
+
+
+}) ();
