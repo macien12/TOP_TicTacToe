@@ -92,6 +92,8 @@ const GameController = (function() {
         isGameOver = false;
         Gameboard.resetBoard();
         currentPlayer = player1;
+        console.log("Game reset!");
+        Gameboard.printBoard;
     }
 
     return {
