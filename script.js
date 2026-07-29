@@ -1,5 +1,5 @@
 const Gameboard = (function() {
-    let board = ["", "", "", "", "", "", "", "", ""]; // Changed const to let
+    let board = ["", "", "", "", "", "", "", "", ""]; 
 
     function placeMark(index, mark) {
         board[index] = mark;
@@ -9,7 +9,7 @@ const Gameboard = (function() {
         board = ["", "", "", "", "", "", "", "", ""];
     }
 
-function printBoard() {
+    function printBoard() {
         // Map empty strings to spaces so the grid borders stay perfectly aligned
         const b = board.map(cell => cell === "" ? " " : cell);
         
@@ -41,6 +41,9 @@ const GameController = (function() {
     const players = [player1, player2];
     let currentPlayer = player1;
     let isGameOver = false;
+    let statusMessage = "";
+
+    
 
     const WINNING_COMBINATIONS = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
@@ -69,6 +72,8 @@ const GameController = (function() {
     }
 
     function playRound(index) {
+        player2.name = document.getElementById("playerTwo").value || "player 1";
+        player1.name = document.getElementById("playerOne").value || "player 2";
         if (isGameOver) return;
 
         if (Gameboard.getBoard()[index] === "") {
@@ -78,9 +83,11 @@ const GameController = (function() {
 
             if (checkWin()) {
                 isGameOver = true;
-                console.log(`${currentPlayer.mark} wins!`);
+                statusMessage = `${currentPlayer.name} wins!`;
+                console.log(`${currentPlayer.name} wins!`);
             } else if (checkTie()) {
                 isGameOver = true;
+                statusMessage = `Its a Tie!`;
                 console.log("It's a tie!");
             } else {
                 switchTurn();
@@ -94,23 +101,68 @@ const GameController = (function() {
         currentPlayer = player1;
         console.log("Game reset!");
         Gameboard.printBoard;
+        statusMessage = "";
+    }
+
+
+
+    function getGameStatus() {
+    return statusMessage;
     }
 
     return {
         playRound,
-        resetGame,
+        resetGame, 
+        getGameStatus, 
     };
+
 })();
 
 
 const DisplayController = (function() {
 
+    const scoreElement = document.querySelector(".score");
+
+    const render = () => {
+    const board = Gameboard.getBoard();
+    const cells = document.querySelectorAll(".cell");
+
+    cells.forEach((cell, index) =>{
+        cell.textContent = board[index];
+    });
+
+    scoreElement.textContent = GameController.getGameStatus();
+}
+        
 const boardElement = document.querySelector(".board");
 
 boardElement.addEventListener("click", (e) => {
     const index = e.target.dataset.index;
     if (index !== undefined) {
+        const name1 = document.getElementById("playerOne").value;
+        const name2 = document.getElementById("playerTwo").value;
+
         GameController.playRound(index);
+        render();
+
     }
 });
+
+
+const resetGame = document.getElementById("Reset");
+
+resetGame.addEventListener("click", (e) => {
+    GameController.resetGame();
+    render();
+    
+});
+
+    render();
+    return { render };
+
+
+    
+
 })();
+
+

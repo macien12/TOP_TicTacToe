@@ -3,8 +3,101 @@
   padding: 0;
 }
 
+body {
+  background-color: lightgray;
+}
+
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.cell {
+  background-color:#44c767;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:32px; 
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+  height: 100px;
+  width: 100px;
+  transition: 0.2s ease;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  padding: 20px;
+  background-color: #1e293b;
+  color: white;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  margin-bottom: 40px;
+}
+
+#Reset {
+  background-color: #3b82f6;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#Reset:hover {
+  background-color: #2563eb;
+}
+
+.header input[type="text"] {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #475569;
+  background-color: #0f172a;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+}
+
+.header input[type="text"]:focus {
+  border-color: #38bdf8;
+  outline: none;
+}
+
+
+.scoreBox {
+  text-align: center;
+  margin-top: 20px;
+  min-height: 40px;
+}
+
+.score {
+  font-family: Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+
+
+.header, 
+.header input[type="text"], 
+#Reset, 
+.score {
+  font-family: 'Press Start 2P', cursive;
+}
+
+
+.cell:hover {
+  background-color: #3cb05c;
 }
